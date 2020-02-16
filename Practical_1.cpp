@@ -95,4 +95,3 @@ void printEmptyMatrix(std::string pString[6][6]) {
         print << vtab;
     }
 }
-
