@@ -1,10 +1,7 @@
 #include <iostream>
 #include <string>
 
-#define print std::cout
-#define nl std::endl
-#define get std::cin
-#define str std::string
+using namespace std;
 
 int main() {
     struct Birthday {
@@ -13,65 +10,67 @@ int main() {
         int year;
 
         void printData() {
-            print << "Day of birth: " + std::to_string(this->day) << nl;
-            print << "Month of birth: " + std::to_string(this->month) << nl;
-            print << "Year of birth: " + std::to_string(this->year) << nl;
+            cout << "Day of birth: " + std::to_string(this->day) << endl;
+            cout << "Month of birth: " + std::to_string(this->month) << endl;
+            cout << "Year of birth: " + std::to_string(this->year) << endl;
         }
     };
 
     struct Person {
-        str name;
-        str surname;
+        string name;
+        string surname;
         Birthday birthday;
-        str cityOfBirth;
+        string cityOfBirth;
 
         void printData() {
-            print << "Name: " + this->name << nl;
-            print << "Surname: " + this->surname << nl;
+            cout << "Name: " + this->name << endl;
+            cout << "Surname: " + this->surname << endl;
             this->birthday.printData();
-            print << "City of birth: " + this->cityOfBirth << nl;
+            cout << "City of birth: " + this->cityOfBirth << endl;
         }
     };
 
-    print << "Enter quantity of persons to create\n> ";
+    cout << "Enter quantity of persons to create\n> ";
     int quantity;
-    get >> quantity;
+    cin >> quantity;
 
     auto personList = new Person[quantity];
 
     for (int i = 0; i < quantity; ++i) {
-        print << "Enter name\n> ";
-        str name;
-        get >> name;
+        cout << "Enter name\n> ";
+        string name;
+        cin >> name;
 
-        print << "Enter surname\n> ";
-        str surname;
-        get >> surname;
+        cout << "Enter surname\n> ";
+        string surname;
+        cin >> surname;
 
-        print << "Enter day of birth\n> ";
+        cout << "Enter day of birth\n> ";
         int day;
-        get >> day;
+        cin >> day;
 
-        print << "Enter month of birth\n> ";
+        cout << "Enter month of birth\n> ";
         int month;
-        get >> month;
+        cin >> month;
 
-        print << "Enter year of birth\n> ";
+        cout << "Enter year of birth\n> ";
         int year;
-        get >> year;
+        cin >> year;
 
-        print << "Enter city of birth\n> ";
-        str city;
-        get >> city;
+        cout << "Enter city of birth\n> ";
+        string city;
+        cin >> city;
 
-        auto person = Person{name, surname, {day, month, year}, city};
+        Person person = Person{name, surname, {day, month, year}, city};
         personList[i] = person;
     }
 
     for (int j = 0; j < quantity; ++j) {
         personList[j].printData();
-        print << nl;
+        cout << endl;
     }
+
+    delete[] personList;
 
     getchar();
     return 0;
