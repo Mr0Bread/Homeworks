@@ -19,7 +19,7 @@ int main() {
     struct Person {
         string name;
         string surname;
-        Birthday birthday;
+        Birthday birthday{};
         string cityOfBirth;
 
         void printData() {
@@ -71,7 +71,8 @@ int main() {
     }
 
     delete[] personList;
-
+    
+    putchar('\n');
     getchar();
     return 0;
 }
