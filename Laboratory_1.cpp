@@ -1,61 +1,53 @@
 #include <iostream>
 #include <string>
-#include <vector>
 
-#define print std::cout
-#define str std::string
-#define get std::cin
-#define nl std::endl
+std::string getConvertedWord(std::string &tempString) {
+    int lengthInit = (int)tempString.length();
+    char* charString = new char[lengthInit];
 
-std::string getConvertedString(const std::string &basicString);
+    for (int startIndex = 0, endIndex = lengthInit - 1; startIndex < lengthInit; ++startIndex, endIndex--) {
+        charString[startIndex] = tempString[endIndex];
+    }
 
-int main() {
-    print << "Enter string to print it out vice versa" << nl;
-    str stringToConvert;
-    std::getline(get, stringToConvert);
 
-    str convertedString = getConvertedString(stringToConvert);
-    print << "Converted string: " << convertedString << nl;
+    std::string convertedWord = charString;
+    int lengthAfter = (int)convertedWord.length();
 
-    system("read");
-    return 0;
+    if (lengthAfter > lengthInit) {
+        auto diff = lengthAfter - lengthInit;
+
+        for (int i = 0; i < diff; i ++) {
+            convertedWord.pop_back();
+        }
+    }
+
+    delete[] charString;
+    return convertedWord;
 }
 
-std::string getConvertedString(const std::string &basicString) {
-    str convertedString;
-    std::vector<str> stringVector;
+int main() {
+    std::cout << "Enter string to convert" << std::endl;
+    std::string toConvert;
+    std::string tempString;
+    getline(std::cin, toConvert);
 
-    for (int i = 0, lastPos = 0; i < 1; ++i) {
-        auto spacePos = basicString.find(' ', lastPos);
+    auto spacePos = toConvert.find(' ');
+    int lastPos = 0;
 
-        if (spacePos != str::npos) {
-            stringVector.push_back(basicString.substr(lastPos, spacePos - lastPos));
-            lastPos = (int)spacePos + 1;
-            i = -1;
-        } else {
-            try {
-                stringVector.push_back(basicString.substr(lastPos, (basicString.length() - 1) - spacePos));
-            } catch (...) {
-                print << "exception handled!" << nl;
-            }
-        }
+    for (; spacePos != std::string::npos;) {
+        tempString = toConvert.substr(lastPos, spacePos - lastPos);
+        std::string convertedWord = getConvertedWord(tempString);
+        toConvert.replace(lastPos, spacePos - lastPos, convertedWord);
+        lastPos = (int)spacePos + 1;
+        spacePos = toConvert.find(' ', lastPos);
     }
 
-    for (auto & j : stringVector) {
-        auto charString = new char[j.length()];
+    tempString = toConvert.substr(lastPos, toConvert.length() - lastPos);
+    std::string convertedWord = getConvertedWord(tempString);
+    toConvert.replace(lastPos, spacePos - lastPos, convertedWord);
 
-        for (int i = 0; i < j.length(); ++i) {
-            charString[i] = j[j.length() - i - 1];
-        }
+    std::cout << "Converted string: " + toConvert << std::endl;
 
-        convertedString.append(charString);
-
-        if (j != stringVector.back()) {
-            convertedString.append(" ");
-        }
-
-        delete[] charString;
-    }
-
-    return convertedString;
+    getchar();
+    return 0;
 }
