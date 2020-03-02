@@ -57,7 +57,7 @@ int getDaysToEaster() {
     easter.tm_sec = 0;
     easter.tm_min = 0;
     easter.tm_mon = 3;
-    easter.tm_mday = 19;
+    easter.tm_mday = 12;
     easter.tm_hour = 0;
 
     seconds = difftime(mktime(&easter), now);
@@ -88,7 +88,7 @@ int main() {
                 print << "Till my birthday is " << getDaysToBirthday() << " days" << nl;
                 break;
             case 3:
-                print << getDaysToEaster() << nl;
+                print << "Till easter is " << getDaysToEaster() << " days" << nl;
                 break;
             case 4:
                 run = false;
