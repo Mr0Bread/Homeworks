@@ -3,5 +3,5 @@ project(Homeworks)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Homeworks Practical_6.cpp)
+add_executable(Homeworks Laboratory_2.cpp)
 #add_executable(Homeworks Laboratory_1.cpp)

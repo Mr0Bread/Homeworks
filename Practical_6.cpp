@@ -10,20 +10,8 @@
 int main() {
     str fileName;
     str line;
-    std::fstream file;
-
-
-    do {
-        print << "Enter file name to open: ";
-        input >> fileName;
-        file.open(fileName, std::ios::in);
-
-    } while (!file.is_open());
-
-    while (std::getline(file, line)) {
-        print << line << nl;
-    }
-
+    std::ifstream file;
+    file.open("countriesSmall.txt");
 
     file.close();
     getchar();
