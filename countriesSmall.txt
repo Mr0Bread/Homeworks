@@ -1,0 +1,15 @@
+1 Monaco 2
+2 Grenada 344
+3 Malta 316
+4 Maldives 300
+5 Vatican 0
+6 Nauru 21
+7 Tuvalu 26
+8 Liechtenstein 160
+9 Latvia 255
+10 Sweden 143
+11 Finland 141
+12 Russia 455
+13 USA 423
+14 Cyprus 54
+15 UK 411
