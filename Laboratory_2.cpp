@@ -10,6 +10,14 @@ struct Birthday {
     unsigned int day;
     unsigned int month;
     unsigned int year;
+
+    Birthday() {
+        day = 0;
+        month = 0;
+        year = 0;
+    }
+
+    Birthday(unsigned int day, unsigned int month, unsigned int year) : day(day), month(month), year(year) {}
 };
 
 struct Person {
@@ -35,7 +43,41 @@ int main() {
     auto* persons = new Person[personCount];
 
     for (int i = 0; i < personCount; i++) {
+        Person person;
 
+        print << "Enter name: ";
+        input >> person.name;
+
+        print << "Enter surname: ";
+        input >> person.surname;
+
+        print << "Enter id: ";
+        input >> person.id;
+
+        Birthday birthday;
+        print << "Enter birthday day: ";
+        input >> birthday.day;
+        print << "Enter birthday month: ";
+        input >> birthday.month;
+        print << "Enter birthday year: ";
+        input >> birthday.year;
+
+        person.birthday = birthday;
+
+        print << "Enter date: ";
+        input >> person.date;
+
+        print << "Enter salary: ";
+        input >> person.salary;
+
+        print << "Enter hometown: ";
+        input >> person.hometown;
+
+        print << "Enter country: ";
+        input >> person.country;
+
+        print << "Enter workPlace: ";
+        input >> person.workPlace;
     }
 
     delete [] persons;
