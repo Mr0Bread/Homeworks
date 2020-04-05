@@ -32,13 +32,13 @@ int main() {
         input >> personCount;
     } while (personCount < 1 or personCount > 9);
 
-    Person persons = *new Person[personCount];
+    auto* persons = new Person[personCount];
 
     for (int i = 0; i < personCount; i++) {
 
     }
 
-    delete persons[];
+    delete [] persons;
 
     return 0;
 }
