@@ -23,10 +23,10 @@ struct Birthday {
 struct Person {
     str name;
     str surname;
-    unsigned int id;
+    short int id;
     Birthday birthday;
-    unsigned int date;
-    unsigned int salary;
+    str date;
+    short int salary;
     str hometown;
     str country;
     str workPlace;
@@ -40,7 +40,7 @@ int main() {
         input >> personCount;
     } while (personCount < 1 or personCount > 9);
 
-    auto* persons = new Person[personCount];
+    auto *persons = new Person[personCount];
 
     for (int i = 0; i < personCount; i++) {
         Person person;
@@ -78,9 +78,27 @@ int main() {
 
         print << "Enter workPlace: ";
         input >> person.workPlace;
+
+        persons[i] = person;
     }
 
-    delete [] persons;
+    for (int i = 0; i < personCount; i++) {
+        print << "Person number " << i << ":" << nl;
+
+        print << "Name is " << persons[i].name << " " << persons[i].surname << nl;
+        print << "ID is equal to " << persons[i].id << nl;
+
+        print << "Was born in " << persons[i].birthday.year << '.' << persons[i].birthday.month << '.' <<
+        persons[i].birthday.day << nl;
+
+        print << "Born in " << persons[i].country << ", " << persons[i].hometown << nl;
+
+        print << "Works at " << persons[i].workPlace;
+
+        print << "\n\n";
+    }
+
+    delete[] persons;
 
     return 0;
 }
