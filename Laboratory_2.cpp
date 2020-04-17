@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
 #include <string>
 
 #define print std::cout
@@ -32,8 +34,11 @@ struct Person {
     str workPlace;
 };
 
+void printPerson(const Person &person);
+
 int main() {
     int personCount;
+    std::vector<int> indexesToDelete;
 
     do {
         print << "Enter number of persons to fill from 1 to 9: ";
@@ -83,22 +88,95 @@ int main() {
     }
 
     for (int i = 0; i < personCount; i++) {
-        print << "Person number " << i << ":" << nl;
+        print << "\n\nPerson number " << i << ":" << nl;
 
-        print << "Name is " << persons[i].name << " " << persons[i].surname << nl;
-        print << "ID is equal to " << persons[i].id << nl;
-
-        print << "Was born in " << persons[i].birthday.year << '.' << persons[i].birthday.month << '.' <<
-        persons[i].birthday.day << nl;
-
-        print << "Born in " << persons[i].country << ", " << persons[i].hometown << nl;
-
-        print << "Works at " << persons[i].workPlace;
+        printPerson(persons[i]);
 
         print << "\n\n";
+    }
+    bool run = true;
+    while (run) {
+        print
+                << "Enter operation you want to perform 'search' or 'delete' without quotes or enter 'exit' to exit from program\n> ";
+        str operation;
+        input >> operation;
+
+        if (operation == "exit") {
+            run = false;
+        } else if (operation == "search") {
+            print << "Enter data to search by(It can be Name, ID, Birthday, Salary, Country or Work place)\n> ";
+            str keyword;
+            input >> keyword;
+
+            for (int i = 0; i < personCount; i++) {
+                if (persons[i].name == keyword
+                    or std::to_string(persons[i].id) == keyword
+                    or persons[i].date == keyword
+                    or std::to_string(persons[i].salary) == keyword
+                    or persons[i].country == keyword
+                    or persons[i].workPlace == keyword) {
+                    print << "System found match!\n";
+
+                    printPerson(persons[i]);
+
+                    print << "\n\n";
+                }
+            }
+        } else if (operation == "delete") {
+            print << "Enter Surname of person you want to delete or ID\n> ";
+            str keyword;
+            input >> keyword;
+
+            for (int i = 0; i < personCount; i++) {
+                if (persons[i].surname == keyword
+                    or std::to_string(persons[i].id) == keyword) {
+                    indexesToDelete.push_back(i);
+                }
+            }
+            personCount -= indexesToDelete.size();
+            auto *tempPersons = new Person[personCount];
+
+            for (int i = 0, k = 0; i < personCount + indexesToDelete.size(); i++) {
+                for (int index : indexesToDelete) {
+                    if (i != index) {
+                        tempPersons[k] = persons[i];
+                        k++;
+                    }
+                }
+            }
+
+            persons = new Person[personCount];
+
+            for (int i = 0; i < personCount; i++) {
+                persons[i] = tempPersons[i];
+            }
+
+            delete[] tempPersons;
+
+            for (int i = 0; i < personCount; i++) {
+                printPerson(persons[i]);
+                print << "\n\n";
+            }
+        } else {
+            print << "Wrong input" << nl;
+        }
     }
 
     delete[] persons;
 
     return 0;
+}
+
+void printPerson(const Person &person) {
+
+    print << "Name is " << person.name << " " << person.surname << nl;
+    print << "ID is equal to " << person.id << nl;
+
+    print << "Was born in " << person.birthday.year << '.' << person.birthday.month << '.' <<
+          person.birthday.day << nl;
+
+    print << "Born in " << person.country << ", " << person.hometown << nl;
+
+    print << "Works at " << person.workPlace;
+
 }
