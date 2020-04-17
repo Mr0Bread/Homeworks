@@ -162,6 +162,23 @@ int main() {
         }
     }
 
+    std::ofstream toFile;
+    toFile.open("persons.txt");
+
+    for (int i = 0; i < personCount; i++) {
+        toFile << "Name is " << persons[i].name << " " << persons[i].surname << nl;
+        toFile << "ID is equal to " << persons[i].id << nl;
+
+        toFile << "Was born in " << persons[i].birthday.year << '.' << persons[i].birthday.month << '.' <<
+               persons[i].birthday.day << nl;
+
+        toFile << "Born in " << persons[i].country << ", " << persons[i].hometown << nl;
+
+        toFile << "Works at " << persons[i].workPlace;
+    }
+
+    toFile.close();
+
     delete[] persons;
 
     return 0;
