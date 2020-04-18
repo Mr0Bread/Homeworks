@@ -10,10 +10,6 @@
 #define MIN_INPUT 1
 #define ARRAY_SIZE 4   // and the array size declarator.
 
-str getArabicFromRoman();
-
-void getRomanFromArabic();
-
 str convert(int digit, str low, str mid, str high) {
 
     if (digit == 1) {
@@ -48,29 +44,9 @@ str convert(int digit, str low, str mid, str high) {
     }
 }
 
-int main() {
-    bool run = true;
-    while (run) {
-        print << "Enter 0 to exit, 1 to convert from Arabic to Roman or 2 to convert from Roman to Arabic\n";
-        str operation;
-        input >> operation;
-
-        if (operation == "0") {
-            run = false;
-        } else if (operation == "1") {
-            getRomanFromArabic();
-        } else if (operation == "2") {
-            print << getArabicFromRoman();
-        } else {
-            print << "Unknown command\n";
-        }
-    }
-}
-
 void getRomanFromArabic() {
     str answers[ARRAY_SIZE] = {"", "", "", ""}; //An  array of string to hold the output from the convert function.
-    int accumulator = 0; // Variable to hold number of arabic numbers converted.
-    int userNum = 0;
+    int userNum;
     str strUserNum;
 
     print << "";
@@ -79,7 +55,7 @@ void getRomanFromArabic() {
 
     userNum = std::stoi(strUserNum);
 
-    if (userNum == 0 || userNum > MAX_INPUT) {
+    if (userNum < MIN_INPUT || userNum > MAX_INPUT) {
         print << "\nInvalid Value. Number must be between 1 and 100" << nl;
         return;
     }
@@ -104,6 +80,8 @@ void getRomanFromArabic() {
 }
 
 str getArabicFromRoman() {
+    input.clear();
+    while (input.get() != '\n');
     char roman_Numeral;
     int arabic_Numeral = 0;
 
@@ -167,4 +145,23 @@ str getArabicFromRoman() {
             break;
     }
     return std::to_string(arabic_Numeral);
+}
+
+int main() {
+    bool run = true;
+    while (run) {
+        print << "Enter 0 to exit, 1 to convert from Arabic to Roman or 2 to convert from Roman to Arabic\n";
+        str operation;
+        input >> operation;
+
+        if (operation == "0") {
+            run = false;
+        } else if (operation == "1") {
+            getRomanFromArabic();
+        } else if (operation == "2") {
+            print << getArabicFromRoman();
+        } else {
+            print << "Unknown command\n";
+        }
+    }
 }
